@@ -3,16 +3,14 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const TodoList = props => (
+const TodoList = ({ todos, addTodo }) => (
     <Fragment>
         <ul>
-            {props.todos.map(todo => (
+            {todos.map(todo => (
                 <li key={todo.id}>{todo.text}</li>
             ))}
         </ul>
-        <button onClick={() => props.addTodo("Fazer café de novo")}>
-            Adicionar
-        </button>
+        <button onClick={() => addTodo("Fazer café de novo")}>Adicionar</button>
     </Fragment>
 );
 
