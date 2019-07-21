@@ -16,6 +16,6 @@
         "linebreak-style": "off",
         "react/prop-types": "off",
         "react/jsx-indent": [2, 4],
-        "indent": ["erros", 4]
+        "indent": ["error", 4]
     }
 }
