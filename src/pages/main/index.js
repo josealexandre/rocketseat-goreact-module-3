@@ -1,11 +1,33 @@
 import React, { Component, Fragment } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-export default class Main extends Component {
+import PropTypes from "prop-types";
+
+import * as FavoriteActions from "../../store/actions/favorites";
+
+class Main extends Component {
+    static propTypes = {
+        favorites: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                name: PropTypes.string.isRequired,
+                description: PropTypes.string.isRequired,
+                url: PropTypes.string.isRequired
+            })
+        ),
+        addFavorite: PropTypes.func.isRequired
+    };
+
     state = {
         repositoryInput: ""
     };
 
-    //handleAddRepository = () => {};
+    handleAddRepository = event => {
+        event.preventDefault();
+
+        this.props.addFavorite();
+    };
 
     render() {
         return (
@@ -25,16 +47,29 @@ export default class Main extends Component {
                 </form>
 
                 <ul>
-                    <li>
-                        <p>
-                            <strong>facebook/react</strong> (A declarative,
-                            efficient, and flexible JavaScript library for
-                            building user interfaces)
-                        </p>
-                        <a href="https://github.com/facebook/react">Acessar</a>
-                    </li>
+                    {this.props.favorites.map(favorite => (
+                        <li>
+                            <p>
+                                <strong>{favorite.name}</strong> (
+                                {favorite.description})
+                            </p>
+                            <a href={favorite.url}>Acessar</a>
+                        </li>
+                    ))}
                 </ul>
             </Fragment>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    favorites: state.favorites
+});
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(FavoriteActions, dispatch);
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Main);
