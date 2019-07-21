@@ -6,8 +6,6 @@ import store from "./store/index";
 
 import Routes from "./routes";
 
-console.tron.log({ Hello: "world" });
-
 const App = () => (
     <Provider store={store}>
         <Routes />

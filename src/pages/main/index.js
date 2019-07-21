@@ -16,7 +16,7 @@ class Main extends Component {
                 url: PropTypes.string.isRequired
             })
         ),
-        addFavorite: PropTypes.func.isRequired
+        addFavoriteRequest: PropTypes.func.isRequired
     };
 
     state = {
@@ -26,7 +26,7 @@ class Main extends Component {
     handleAddRepository = event => {
         event.preventDefault();
 
-        this.props.addFavorite();
+        this.props.addFavoriteRequest(this.state.repositoryInput);
     };
 
     render() {
@@ -39,7 +39,7 @@ class Main extends Component {
                         value={this.state.repositoryInput}
                         onChange={e =>
                             this.setState({
-                                handleAddRepository: e.target.value
+                                repositoryInput: e.target.value
                             })
                         }
                     />
