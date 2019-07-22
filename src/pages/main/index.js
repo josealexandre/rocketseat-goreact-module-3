@@ -49,7 +49,6 @@ class Main extends Component {
                         }
                     />
                     <button type="submit">Adicionar</button>
-                    {console.tron.log(this.props.favorites.loading)}
                     {this.props.favorites.loading && <span>Carregando...</span>}
                 </form>
 
