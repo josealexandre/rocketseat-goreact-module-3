@@ -12,13 +12,14 @@ class Main extends Component {
             loading: PropTypes.bool,
             data: PropTypes.arrayOf(
                 PropTypes.shape({
-                    id: PropTypes.number.isRequired,
-                    name: PropTypes.string.isRequired,
-                    description: PropTypes.string.isRequired,
-                    url: PropTypes.string.isRequired
+                    id: PropTypes.number,
+                    name: PropTypes.string,
+                    description: PropTypes.string,
+                    url: PropTypes.string
                 })
-            )
-        }),
+            ),
+            error: PropTypes.oneOfType([null, PropTypes.string])
+        }).isRequired,
         addFavoriteRequest: PropTypes.func.isRequired
     };
 
@@ -50,6 +51,11 @@ class Main extends Component {
                     />
                     <button type="submit">Adicionar</button>
                     {this.props.favorites.loading && <span>Carregando...</span>}
+                    {this.props.favorites.error && (
+                        <span style={{ color: "#f00" }}>
+                            {this.props.favorites.error}
+                        </span>
+                    )}
                 </form>
 
                 <ul>
