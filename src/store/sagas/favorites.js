@@ -1,5 +1,5 @@
 import api from "../../services/api";
-import { call, put } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 
 import { Creators as FavoriteActions } from "../ducks/favorites";
 
@@ -9,6 +9,18 @@ export function* addFavorite(action) {
             api.get,
             `/repos/${action.payload.repository}`
         );
+
+        const existingFavorite = yield select(state =>
+            state.favorites.data.find(favorite => favorite.id === data.id)
+        );
+
+        if (existingFavorite) {
+            console.tron.log(existingFavorite);
+            yield put(
+                FavoriteActions.addFavoriteFailure("Repositório duplicado")
+            );
+            return;
+        }
 
         const repositoryData = {
             id: data.id,

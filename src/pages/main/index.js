@@ -60,7 +60,7 @@ class Main extends Component {
 
                 <ul>
                     {this.props.favorites.data.map(favorite => (
-                        <li>
+                        <li key={favorite.id}>
                             <p>
                                 <strong>{favorite.name}</strong> (
                                 {favorite.description})
